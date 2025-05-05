@@ -51,6 +51,19 @@
 | item_id              | references | null: false, foreign_key: true | 
 | user_id              | references | null: false, foreign_key: true | 
 | purchase_price       | integer    | null: false                    |
+
+### Association  
+- belongs_to :item  # 購入した商品  
+- belongs_to :user  # 購入者  
+
+
+## shipping_address テーブル
+
+| Column               | Type       | Options                        |
+| -------------------- | ---------- | ------------------------------ |
+| order_id             | references | null: false, foreign_key: true | 
+| user_id              | references | null: false, foreign_key: true | # 購入者
+
 | shipping_postal_code | string     | null: false                    |
 | shipping_prefecture  | string     | null: false                    | 
 | shipping_city        | string     | null: false                    |  
@@ -63,16 +76,3 @@
 - belongs_to :user  # 購入者  
 
 
-
-## comments テーブル
-
-| Column   | Type       | Options                        |
-| -------- | ---------- | ------------------------------ |
-| content  | string     |                                |
-| user_id  | references | null: false, foreign_key: true |
-| item_id  | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :item
-- belongs_to :user
