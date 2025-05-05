@@ -16,7 +16,7 @@
 
 - has_many :items
 - has_many :orders
-- has_many :comments
+- has_one :shipping_address
 
 
 ## items テーブル
@@ -41,7 +41,6 @@
 
 - belongs_to :user  # 出品者
 - has_one :order    # 1商品につき1つの注文
-- has_many :comments
 
 
 ## orders テーブル
@@ -55,6 +54,7 @@
 ### Association  
 - belongs_to :item  # 購入した商品  
 - belongs_to :user  # 購入者  
+- has_one :shipping_address
 
 
 ## shipping_address テーブル
@@ -63,7 +63,6 @@
 | -------------------- | ---------- | ------------------------------ |
 | order_id             | references | null: false, foreign_key: true | 
 | user_id              | references | null: false, foreign_key: true | # 購入者
-
 | shipping_postal_code | string     | null: false                    |
 | shipping_prefecture  | string     | null: false                    | 
 | shipping_city        | string     | null: false                    |  
@@ -72,7 +71,5 @@
 | phone_number         | string     | null: false                    |  
 
 ### Association  
-- belongs_to :item  # 購入した商品  
+- belongs_to :order 
 - belongs_to :user  # 購入者  
-
-
