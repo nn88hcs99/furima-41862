@@ -11,9 +11,7 @@
 | last_name          | string  | null: false               |
 | kana_family_name   | string  | null: false               |
 | kana_last_name     | string  | null: false               |
-| birth_year_id      | integer | null: false               |
-| birth_month_id     | integer | null: false               |
-| birth_day_id       | integer | null: false               |
+| birth_date         | date    | null: false               |
 
 ### Association
 
@@ -21,34 +19,30 @@
 - has_many :orders
 - has_one :shipping_address
 
-- belongs_to_active_hash :birth_year
-- belongs_to_active_hash :birth_month
-- belongs_to_active_hash :birth_day
-
-
 ## items テーブル
 
 | Column                 | Type        | Options                        |
 | ---------------------  | ----------  | ------------------------------ |
 | item_title             | string      | null: false                    |
 | item_description       | text        | null: false                    |
+| category_id            | integer     | null: false                    |
 | item_condition_id      | integer     | null: false                    |
 | shipping_fee_payer_id  | integer     | null: false                    |
 | prefecture_id          | integer     | null: false                    |
-| shipping_days_id       | integer     | null: false                    |
+| shipping_day_id        | integer     | null: false                    |
 | sales_price            | integer     | null: false                    |
 | user                   | references  | null: false, foreign_key: true |
-| is_sold                | boolean     | null: false, default: false    |
 
 ### Association
 
 - belongs_to :user  # 出品者
 - has_one :order    # 1商品につき1つの注文
 
+- belongs_to_active_hash :category
 - belongs_to_active_hash :item_condition
 - belongs_to_active_hash :shipping_fee_payer
 - belongs_to_active_hash :prefecture
-- belongs_to_active_hash :shipping_days
+- belongs_to_active_hash :shipping_day
 
 ## orders テーブル
 
@@ -79,4 +73,3 @@
 - belongs_to :order 
 
 - belongs_to_active_hash :prefecture
-
