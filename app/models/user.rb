@@ -4,14 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :email, presence: true
-  validates :password, presence: true, length: { minimum: 6 }, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: " is invalid. Include both letters and numbers" }
+  validates :password,
+            format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: ' is invalid. Include both letters and numbers' }
   validates :nickname, presence: true
-
-  validates :family_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: " is invalid. Input full-width characters"}
-  validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: " is invalid. Input full-width characters"}
-  validates :kana_family_name, presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: " is invalid. Input full-width katakana characters"}
-  validates :kana_last_name, presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: " is invalid. Input full-width katakana characters"}
+  validates :family_name, presence: true,
+                          format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: ' is invalid. Input full-width characters' }
+  validates :last_name, presence: true,
+                        format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: ' is invalid. Input full-width characters' }
+  validates :kana_family_name, presence: true,
+                               format: { with: /\A[ァ-ヶー]+\z/, message: ' is invalid. Input full-width katakana characters' }
+  validates :kana_last_name, presence: true,
+                             format: { with: /\A[ァ-ヶー]+\z/, message: ' is invalid. Input full-width katakana characters' }
   validates :birth_date, presence: true
-
 end
