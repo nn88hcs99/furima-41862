@@ -15,9 +15,9 @@ class Item < ApplicationRecord
   validates :item_description, presence: true, length: { maximum: 1000 } # 1000文字制限
 
   validates :sales_price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-  #validates :sales_price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }  # 価格範囲
   validates :category_id, :item_condition_id, :shipping_fee_payer_id, :prefecture_id, :shipping_day_id, numericality: { other_than: 0 , message: "can't be blank"}
-  #validate :image_presence
+  validates :image, presence: true
+
   
 
 end
