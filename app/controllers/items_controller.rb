@@ -12,10 +12,8 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      @item.image.attach(params[:item][:image])
       redirect_to root_path
     else
-      # Rails.logger.debug "Validation Errors: #{@item.errors.full_messages}"
       render :new, status: :unprocessable_entity
     end
   end
@@ -23,7 +21,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:item_title, :item_description, :category_id, :item_condition_id, :shipping_fee_payer_id,
-                                 :prefecture_id, :shipping_day_id, :sales_price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :item_title, :item_description, :category_id, :item_condition_id, 
+                                 :shipping_fee_payer_id, :prefecture_id, :shipping_day_id, :sales_price).merge(user_id: current_user.id)
   end
 end
