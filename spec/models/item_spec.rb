@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @user = FactoryBot.create(:user)  
-    @item = FactoryBot.build(:item, user: @user)  
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.build(:item, user: @user)
   end
 
   describe '商品出品' do
@@ -35,33 +35,33 @@ RSpec.describe Item, type: :model do
       it '販売価格が300未満では出品できない' do
         @item.sales_price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sales price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Sales price must be greater than or equal to 300')
       end
 
       it '販売価格が9,999,999を超えると出品できない' do
         @item.sales_price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sales price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Sales price must be less than or equal to 9999999')
       end
 
       it '販売価格が整数でない場合は出品できない' do
         @item.sales_price = 300.5
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sales price must be an integer")
+        expect(@item.errors.full_messages).to include('Sales price must be an integer')
       end
 
       it '販売価格が半角数値以外の場合は出品できない' do
         @item.sales_price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sales price is not a number")
+        expect(@item.errors.full_messages).to include('Sales price is not a number')
       end
-      
+
       it '画像が添付されていないと出品できない' do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
-      
+
       it 'カテゴリーが未選択（id: 0）では出品できない' do
         @item.category_id = 0
         @item.valid?

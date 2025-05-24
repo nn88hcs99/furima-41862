@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @items = Item.order("created_at DESC")
+    @items = Item.order('created_at DESC')
   end
 
   def new
@@ -12,18 +12,18 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      @item.image.attach(params[:item][:image]) 
+      @item.image.attach(params[:item][:image])
       redirect_to root_path
     else
-      #Rails.logger.debug "Validation Errors: #{@item.errors.full_messages}"
+      # Rails.logger.debug "Validation Errors: #{@item.errors.full_messages}"
       render :new, status: :unprocessable_entity
     end
   end
+
   private
 
-    def item_params
-      params.require(:item).permit(:item_title, :item_description, :category_id, :item_condition_id, :shipping_fee_payer_id, :prefecture_id, :shipping_day_id, :sales_price).merge(user_id: current_user.id)
-    end
-    
+  def item_params
+    params.require(:item).permit(:item_title, :item_description, :category_id, :item_condition_id, :shipping_fee_payer_id,
+                                 :prefecture_id, :shipping_day_id, :sales_price).merge(user_id: current_user.id)
+  end
 end
-
