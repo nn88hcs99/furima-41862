@@ -18,4 +18,6 @@ class Item < ApplicationRecord
   validates :category_id, :item_condition_id, :shipping_fee_payer_id, :prefecture_id, :shipping_day_id,
             numericality: { other_than: 0, message: "can't be blank" }
   validates :image, presence: true
+
+
 end
