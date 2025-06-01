@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item.destroy
+    @item.destroy
     redirect_to root_path
   end
 
@@ -42,25 +42,28 @@ class ItemsController < ApplicationController
   else
     redirect_to root_path
   end
-end
+ end
 
-private
+ private
  def set_item
     @item = Item.find(params[:id])
-  end
+ end
 
  def create_item_params
     params.require(:item).permit(:image, :item_title, :item_description, :category_id, :item_condition_id,
                                  :shipping_fee_payer_id, :prefecture_id, :shipping_day_id, :sales_price)
                          .merge(user_id: current_user.id)
  end
+
  def update_item_params
     params.require(:item).permit(:image, :item_title, :item_description, :category_id, :item_condition_id,
                                  :shipping_fee_payer_id, :prefecture_id, :shipping_day_id, :sales_price)
  end
 
   def authorize_user!
-    #@item = Item.find(params[:id]) # 商品情報を取得
-    redirect_to root_path,  unless @item.user == current_user
+    unless @item.user == current_user
+     redirect_to root_path
+    end
   end
-end
+  
+end  
