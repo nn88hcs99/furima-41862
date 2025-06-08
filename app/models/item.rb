@@ -8,7 +8,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
-  # has_one :order
+   has_one :order
 
   validates :item_title, presence: true, length: { maximum: 40 } # 40文字制限
   validates :item_description, presence: true, length: { maximum: 1000 } # 1000文字制限
