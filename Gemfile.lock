@@ -345,7 +345,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   mini_magick
-  mysql2 (~> 0.5)
+  mysql2 (~> 0.5.5)
   pg
   pry-rails
   puma (>= 5.0)
