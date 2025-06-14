@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :redirect_if_sold, only: [:edit, :update]
 
   def index
     @items = Item.order('created_at DESC')
@@ -57,4 +58,11 @@ class ItemsController < ApplicationController
 
     redirect_to root_path
   end
+
+  def redirect_if_sold
+    if Order.exists?(item_id: @item.id)
+      redirect_to root_path
+    end
+  end
+
 end
