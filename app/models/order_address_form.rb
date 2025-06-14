@@ -1,6 +1,6 @@
 class OrderAddressForm
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :token
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :token, :amount  
 
 with_options presence: true do
   validates :user_id
@@ -21,10 +21,7 @@ end
 
     order = Order.create(user_id: user_id, item_id: item_id)
 
-    ShippingAddress.create(order_id: order.id, postal_code: postal_code, prefecture: prefecture, city: city, 
+    ShippingAddress.create(order_id: order.id, postal_code: postal_code, prefecture_id: prefecture_id, city: city, 
                            house_number: house_number, building_name: building_name, phone_number: phone_number)
   end
 end
-
-  
-  

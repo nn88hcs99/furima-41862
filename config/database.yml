@@ -9,7 +9,7 @@ development:
   password:
   host: localhost
   pool: 15
-  #database: furima_41862_development
+  database: furima_41862_development
 
 test:
   <<: *default
