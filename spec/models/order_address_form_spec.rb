@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe OrderAddressForm, type: :model do
   before do
-    ActiveRecord::Base.connection.disconnect! 
+    ActiveRecord::Base.connection.disconnect!
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
     @order_address_form = FactoryBot.build(:order_address_form, user_id: user.id, item_id: item.id)
@@ -97,8 +97,6 @@ RSpec.describe OrderAddressForm, type: :model do
         @order_address_form.valid?
         expect(@order_address_form.errors.full_messages).to include("Token can't be blank")
       end
-
-
     end
   end
 end

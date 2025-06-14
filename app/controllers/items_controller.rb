@@ -32,30 +32,29 @@ class ItemsController < ApplicationController
   def edit
   end
 
-
- def update
-    if @item.update(item_params) 
+  def update
+    if @item.update(item_params)
       redirect_to @item
     else
       render :edit, status: :unprocessable_entity
     end
- end
+  end
 
- private
- def set_item
+  private
+
+  def set_item
     @item = Item.find(params[:id])
- end
+  end
 
- def item_params
+  def item_params
     params.require(:item).permit(:image, :item_title, :item_description, :category_id, :item_condition_id,
                                  :shipping_fee_payer_id, :prefecture_id, :shipping_day_id, :sales_price)
-                         .merge(user_id: current_user.id)
- end
+          .merge(user_id: current_user.id)
+  end
 
   def authorize_user!
-    unless @item.user == current_user
-     redirect_to root_path
-    end
+    return if @item.user == current_user
+
+    redirect_to root_path
   end
-  
-end  
+end
